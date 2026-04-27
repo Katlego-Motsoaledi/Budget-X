@@ -24,9 +24,9 @@ class LoginActivity : AppCompatActivity() {
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please enter both username and password", Toast.LENGTH_SHORT).show()
             } else {
-                // In the next phase, we will check these against the database
-                Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                // For now, we stay on this screen until we build the Dashboard
+                val intent = Intent(this, DashboardActivity::class.java)
+                startActivity(intent)
+                finish() // This prevents the user from going back to Login when pressing the back button
             }
         }
 
