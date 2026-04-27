@@ -16,9 +16,8 @@ class DashboardActivity : AppCompatActivity() {
 
         // Navigation to the Add Expense screen (we will build this in Phase 8)
         binding.btnAddExpense.setOnClickListener {
-            // This Intent will take you to the next screen
-            // val intent = Intent(this, AddExpenseActivity::class.java)
-            // startActivity(intent)
+            val intent = Intent(this, AddExpenseActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnViewHistory.setOnClickListener {
