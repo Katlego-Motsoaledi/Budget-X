@@ -37,6 +37,17 @@
             android:textSize="32sp"
             android:textStyle="bold"
             android:textColor="#4CAF50" />
+
+        <ProgressBar
+            android:id="@+id/pbBudget"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#4CAF50"
+            android:layout_marginTop="8dp" />
+
     </LinearLayout>
 
     <Button
