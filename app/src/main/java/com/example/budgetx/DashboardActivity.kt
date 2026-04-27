@@ -21,7 +21,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         binding.btnViewHistory.setOnClickListener {
-            // Placeholder for viewing the list for a period
+            startActivity(Intent(this, HistoryActivity::class.java))
         }
     }
 }
