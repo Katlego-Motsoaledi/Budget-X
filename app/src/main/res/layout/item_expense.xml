@@ -4,53 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
-
-    <ImageView
-        android:id="@+id/ivItemPhoto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="12dp"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_camera"
-        android:visibility="gone" />
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="14dp"
+        android:gravity="center_vertical">
 
+        <!-- ICON / PHOTO AREA -->
+        <ImageView
+            android:id="@+id/ivItemPhoto"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:background="#EEF2F7"
+            android:padding="10dp" />
+
+        <!-- TEXT SECTION -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <!-- CATEGORY -->
             <TextView
                 android:id="@+id/tvItemCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category"
+                android:text="Food"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textColor="#111827" />
 
+            <!-- DATE -->
             <TextView
                 android:id="@+id/tvItemDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2026-04-27"
-                android:textColor="#757575" />
+                android:text="27 Apr 2026"
+                android:textSize="12sp"
+                android:textColor="#6B7280"
+                android:layout_marginTop="2dp" />
+
         </LinearLayout>
 
+        <!-- AMOUNT -->
         <TextView
             android:id="@+id/tvItemAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R 0.00"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#4CAF50" />
+            android:textColor="#4F46E5" />
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

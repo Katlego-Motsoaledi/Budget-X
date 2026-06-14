@@ -19,7 +19,7 @@ class GoalSettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSaveGoals.setOnClickListener {
-            // Get inputs and handle invalid entries to prevent crashes
+
             val minText = binding.etMinGoal.text.toString().trim()
             val maxText = binding.etMaxGoal.text.toString().trim()
 
@@ -28,16 +28,34 @@ class GoalSettingsActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val minVal = minText.toDoubleOrNull() ?: 0.0
-            val maxVal = maxText.toDoubleOrNull() ?: 0.0
+            val minVal = minText.toDoubleOrNull()
+            val maxVal = maxText.toDoubleOrNull()
 
-            // Save to database using a coroutine
+            if (minVal == null || maxVal == null) {
+                Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (minVal < 0 || maxVal < 0) {
+                Toast.makeText(this, "Goals cannot be negative", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (minVal > maxVal) {
+                Toast.makeText(this, "Min goal cannot be greater than max goal", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             lifecycleScope.launch {
-                val db = AppDatabase.getDatabase(applicationContext)
-                db.goalDao().setGoals(Goal(minGoal = minVal, maxGoal = maxVal))
+                try {
+                    val db = AppDatabase.getDatabase(applicationContext)
+                    db.goalDao().setGoals(Goal(minGoal = minVal, maxGoal = maxVal))
 
-                Toast.makeText(this@GoalSettingsActivity, "Goals Saved!", Toast.LENGTH_SHORT).show()
-                finish()
+                    Toast.makeText(this@GoalSettingsActivity, "Goals Saved!", Toast.LENGTH_SHORT).show()
+                    finish()
+                } catch (e: Exception) {
+                    Toast.makeText(this@GoalSettingsActivity, "Error saving goals", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

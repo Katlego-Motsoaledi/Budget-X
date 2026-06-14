@@ -1,70 +1,59 @@
 package com.example.budgetx
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.budgetx.data.AppDatabase
-import com.example.budgetx.databinding.ActivityDashboardBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.util.AttributeSet
+import android.view.View
 
-class DashboardActivity : AppCompatActivity() {
+class SimpleBarChartView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : View(context, attrs) {
 
-    private lateinit var binding: ActivityDashboardBinding
+    private var data: Map<String, Float> = emptyMap()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.btnAddExpense.setOnClickListener {
-            startActivity(Intent(this, AddExpenseActivity::class.java))
-        }
-
-        binding.btnViewHistory.setOnClickListener {
-            startActivity(Intent(this, HistoryActivity::class.java))
-        }
-
-        // Add a way to get to the Goal Settings screen
-        binding.tvTotalSpent.setOnClickListener {
-            startActivity(Intent(this, GoalSettingsActivity::class.java))
-        }
+    private val barPaint = Paint().apply {
+        color = Color.parseColor("#4CAF50")
+        style = Paint.Style.FILL
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateDashboardData() // Refresh data every time you return to this screen
+    private val textPaint = Paint().apply {
+        color = Color.BLACK
+        textSize = 28f
+        isAntiAlias = true
     }
 
-    private fun updateDashboardData() {
-        lifecycleScope.launch {
-            val db = AppDatabase.getDatabase(applicationContext)
+    fun setData(newData: Map<String, Float>) {
+        data = newData
+        invalidate()
+    }
 
-            // 1. Get current goals
-            val goals = withContext(Dispatchers.IO) { db.goalDao().getGoals() }
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
 
-            // 2. Get total spent
-            val expenses = withContext(Dispatchers.IO) {
-                db.expenseDao().getExpensesByPeriod("1900-01-01", "2100-12-31")
-            }
-            val total = expenses.sumOf { it.amount }
+        if (data.isEmpty()) return
 
-            // 3. Update UI
-            binding.tvTotalSpent.text = "R ${String.format("%.2f", total)}"
+        val barWidth = width / (data.size * 2f)
+        val maxValue = data.values.maxOrNull() ?: 1f
 
-            if (goals != null && goals.maxGoal > 0) {
-                val progress = (total / goals.maxGoal * 100).toInt()
-                binding.pbBudget.progress = if (progress > 100) 100 else progress
+        var x = barWidth
 
-                // Change color to Red if overspending
-                if (total > goals.maxGoal) {
-                    binding.tvTotalSpent.setTextColor(android.graphics.Color.RED)
-                } else {
-                    binding.tvTotalSpent.setTextColor(android.graphics.Color.parseColor("#4CAF50"))
-                }
-            }
+        data.forEach { (label, value) ->
+
+            val barHeight = (value / maxValue) * (height * 0.7f)
+
+            val left = x
+            val top = height - barHeight
+            val right = x + barWidth
+            val bottom = height.toFloat()
+
+            canvas.drawRect(left, top, right, bottom, barPaint)
+
+            canvas.drawText(label, left, top - 10, textPaint)
+
+            x += barWidth * 2
         }
     }
 }

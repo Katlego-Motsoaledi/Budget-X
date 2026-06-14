@@ -1,48 +1,105 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
+    android:background="#F5F7FB"
+    android:padding="20dp">
 
+    <!-- HEADER -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set Monthly Goals"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+        android:textColor="#111827"
+        android:layout_marginBottom="6dp"/>
 
-    <ProgressBar
-        android:id="@+id/pbBudget"
-        style="?android:attr/progressBarStyleHorizontal"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Control your spending limits"
+        android:textSize="14sp"
+        android:textColor="#6B7280"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- CARD -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="100"
-        android:progress="0"
-        android:progressTint="#4CAF50"
-        android:layout_marginTop="8dp" />
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="18dp"
+        android:elevation="8dp">
 
-    <EditText
-        android:id="@+id/etMinGoal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Minimum Goal (R)"
-        android:inputType="numberDecimal"
-        android:layout_marginBottom="16dp" />
+        <!-- PROGRESS SECTION -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budget Usage"
+            android:textSize="14sp"
+            android:textColor="#6B7280"/>
 
-    <EditText
-        android:id="@+id/etMaxGoal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Maximum Goal (R)"
-        android:inputType="numberDecimal"
-        android:layout_marginBottom="24dp" />
+        <ProgressBar
+            android:id="@+id/pbBudget"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:max="100"
+            android:progress="0"
+            android:layout_marginTop="10dp"
+            android:progressTint="#6366F1"
+            android:backgroundTint="#E5E7EB"/>
 
-    <Button
+        <!-- MIN GOAL -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Minimum Goal (R)"
+            android:layout_marginTop="18dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMinGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- MAX GOAL -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Maximum Goal (R)"
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMaxGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- INFO TEXT -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set realistic limits to manage your spending better."
+            android:textSize="12sp"
+            android:textColor="#9CA3AF"
+            android:layout_marginTop="12dp"/>
+
+    </LinearLayout>
+
+    <!-- SAVE BUTTON -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveGoals"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:text="Save Goals"
-        android:backgroundTint="#4CAF50" />
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#6366F1"
+        android:layout_marginTop="20dp"/>
+
 </LinearLayout>

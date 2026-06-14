@@ -1,49 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center"
-    android:background="#F5F5F5">
+    android:background="#F5F7FB">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#4CAF50"
-        android:layout_marginBottom="32dp" />
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#4F46E5"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="bottom">
 
-    <EditText
-        android:id="@+id/etRegUsername"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budget X"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create your account"
+            android:textSize="14sp"
+            android:textColor="#E5E7EB"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <!-- REGISTER CARD -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Choose Username"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        android:layout_marginTop="-30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#FFFFFF"
+        android:padding="20dp"
+        android:elevation="10dp">
 
-    <EditText
-        android:id="@+id/etRegPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="16dp" />
+        <!-- TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/etRegConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="24dp" />
+        <!-- USERNAME -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username">
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:backgroundTint="#4CAF50" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- PASSWORD -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- CONFIRM PASSWORD -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Confirm Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- REGISTER BUTTON -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Create Account"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#4F46E5"
+            android:layout_marginTop="18dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
