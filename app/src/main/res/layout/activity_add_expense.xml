@@ -3,87 +3,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEF2F7">
+    android:background="#0B1220">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- TOP DASHBOARD HEADER -->
+        <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="169dp"
             android:background="#111827"
-            android:padding="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expenses"
+                android:text="Add Expense"
+                android:textColor="#FFFFFF"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Track and manage your spending"
-                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:text="Log your spending details"
                 android:textColor="#9CA3AF"
-                android:layout_marginTop="4dp"/>
+                android:textSize="14sp" />
 
-            <!-- SUMMARY CARD -->
+            <!-- TODAY SUMMARY -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:layout_marginTop="18dp"
+                android:layout_width="369dp"
+                android:layout_height="89dp"
+                android:layout_marginTop="1dp"
                 android:background="#1F2937"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="13dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Today’s Spending"
-                    android:textColor="#9CA3AF"/>
+                    android:text="Today's Spending"
+                    android:textColor="#9CA3AF" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="R 0.00"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"/>
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- FLOATING CONTENT -->
+        <!-- FORM SECTION -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="20dp"
-            android:layout_marginTop="-30dp">
+            android:layout_marginTop="-25dp"
+            android:orientation="vertical">
 
-            <!-- INPUT CARD -->
+            <!-- CARD -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:elevation="10dp"
+                android:background="#111C33"
                 android:padding="18dp"
+                android:elevation="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add New Expense"
+                    android:text="Expense Details"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#111827"
+                    android:textColor="#FFFFFF"
                     android:layout_marginBottom="12dp"/>
 
                 <!-- AMOUNT -->
@@ -104,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="Category (Food, Transport...)">
+                    android:hint="Category">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etCategory"
@@ -129,22 +129,22 @@
 
             </LinearLayout>
 
-            <!-- DATE / TIME CARD -->
+            <!-- DATE CARD -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:elevation="10dp"
+                android:background="#111C33"
                 android:padding="18dp"
+                android:elevation="8dp"
                 android:layout_marginTop="14dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time Details"
+                    android:text="DDate &amp; Time"
                     android:textStyle="bold"
-                    android:textColor="#111827"
+                    android:textColor="#FFFFFF"
                     android:layout_marginBottom="10dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -199,16 +199,17 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
 
-            <!-- PHOTO -->
+            <!-- RECEIPT -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAttachPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:text="Attach Receipt"
                 android:layout_marginTop="16dp"
-                app:backgroundTint="#6B7280"
+                app:backgroundTint="#334155"
                 android:textColor="#FFFFFF"/>
 
             <ImageView
@@ -219,18 +220,19 @@
                 android:visibility="gone"
                 android:layout_marginTop="12dp"/>
 
-            <!-- SAVE -->
+            <!-- SAVE BUTTON -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSaveExpense"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Save Expense"
                 android:textStyle="bold"
+                android:layout_marginTop="18dp"
                 app:backgroundTint="#10B981"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="18dp"/>
+                android:textColor="#FFFFFF"/>
 
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

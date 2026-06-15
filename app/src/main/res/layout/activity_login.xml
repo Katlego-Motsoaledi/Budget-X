@@ -1,104 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F7FB">
+    android:background="#0B1220">
 
-    <!-- HEADER -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#4F46E5"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="bottom">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Budget X"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Manage your money smarter"
-            android:textSize="14sp"
-            android:textColor="#E5E7EB"
-            android:layout_marginTop="4dp"/>
-    </LinearLayout>
-
-    <!-- LOGIN CARD -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="-30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#FFFFFF"
-        android:padding="20dp"
-        android:elevation="10dp">
+        android:orientation="vertical">
 
-        <!-- TITLE -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#111827"
-            android:layout_marginBottom="16dp"/>
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="#111827"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="bottom">
 
-        <!-- USERNAME -->
-        <com.google.android.material.textfield.TextInputLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budget X"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage your money smarter"
+                android:textSize="14sp"
+                android:textColor="#94A3B8"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+
+        <!-- LOGIN CARD -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username">
+            android:orientation="vertical"
+            android:layout_marginTop="-30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#111C33"
+            android:padding="20dp"
+            android:elevation="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            <!-- TITLE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="16dp"/>
 
-        <!-- PASSWORD -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Password">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPassword"
+            <!-- USERNAME -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Username"
+                android:textColorHint="#94A3B8">
 
-        <!-- LOGIN BUTTON -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="Log In"
-            android:textColor="#FFFFFF"
-            app:backgroundTint="#4F46E5"
-            android:layout_marginTop="18dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- REGISTER LINK -->
-        <TextView
-            android:id="@+id/tvRegisterLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New user? Create account"
-            android:textColor="#4F46E5"
-            android:textStyle="bold"
-            android:layout_marginTop="14dp"/>
+            <!-- PASSWORD -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Password"
+                android:textColorHint="#94A3B8">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- LOGIN BUTTON -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Log In"
+                android:textColor="#0B1220"
+                app:backgroundTint="#38BDF8"
+                android:layout_marginTop="18dp"/>
+
+            <!-- REGISTER LINK -->
+            <TextView
+                android:id="@+id/tvRegisterLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New user? Create account"
+                android:textColor="#38BDF8"
+                android:textStyle="bold"
+                android:layout_marginTop="14dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
