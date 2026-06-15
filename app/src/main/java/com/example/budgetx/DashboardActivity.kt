@@ -1,6 +1,7 @@
 package com.example.budgetx
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +29,15 @@ class DashboardActivity : AppCompatActivity() {
         binding.btnViewHistory.setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
+
+        binding.btnSetGoal.setOnClickListener {
+            startActivity(Intent(this, GoalSettingsActivity::class.java))
+        }
+
+        // NEW FEATURE BUTTON
+        binding.btnResetStreak.setOnClickListener {
+            resetStreak()
+        }
     }
 
     override fun onResume() {
@@ -37,9 +47,10 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun loadDashboardData() {
         lifecycleScope.launch {
+
             val db = AppDatabase.getDatabase(applicationContext)
 
-            // ===== CURRENT MONTH =====
+            // ===== MONTH RANGE =====
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.DAY_OF_MONTH, 1)
 
@@ -58,85 +69,112 @@ class DashboardActivity : AppCompatActivity() {
             val totalSpent = expenses.sumOf { it.amount }
             binding.tvTotalSpent.text = "R ${"%.2f".format(totalSpent)}"
 
-            // ===== GOALS =====
-            val goals = withContext(Dispatchers.IO) {
+            // ===== GOAL =====
+            val goal = withContext(Dispatchers.IO) {
                 db.goalDao().getGoals()
             }
 
-            if (goals != null && goals.maxGoal > 0) {
+            val budgetGoal = goal?.maxGoal ?: 0.0
 
-                val progress = ((totalSpent / goals.maxGoal) * 100)
-                    .toInt()
-                    .coerceAtMost(100)
-
-                binding.pbBudget.progress = progress
+            if (budgetGoal <= 0) {
+                showEmptyState()
+                return@launch
             }
 
-            // ===== STREAK CALCULATION =====
-            val streak = calculateUnder5000Streak(db)
+            // ===== PROGRESS =====
+            val progress = ((totalSpent / budgetGoal) * 100)
+                .toInt()
+                .coerceAtMost(100)
 
-            // ===== GAMIFICATION ADDED HERE =====
-            val level = getStreakLevel(streak)
-            val badge = getBadge(streak)
-            val fire = getFire(streak)
+            binding.pbBudget.progress = progress
 
-            binding.tvStreak.text = "$fire $streak • $level"
-            binding.tvRating.text = badge
+            // ===== STREAK =====
+            val streak = calculateStreak(db, budgetGoal)
 
-            // Optional: savings message becomes more motivating
-            val savings = goals?.maxGoal?.minus(totalSpent) ?: 0.0
+            binding.tvStreak.text = "${getFire(streak)} $streak • ${getLevel(streak)}"
+            binding.tvRating.text = getBadge(streak)
+
+            val savings = budgetGoal - totalSpent
             binding.tvSavings.text = "Savings: R ${"%.2f".format(savings)}"
 
-            // ===== CHART =====
-            val categoryData = expenses.groupBy { it.category }
-                .mapValues { entry ->
-                    entry.value.sumOf { it.amount }.toFloat()
-                }
+            // ===== WARNING SYSTEM =====
+            val usage = (totalSpent / budgetGoal) * 100
 
-            binding.dashboardChart.setData(categoryData)
+            binding.tvWarning.text = when {
+                usage >= 100 -> "⚠ Budget exceeded!"
+                usage >= 80 -> "⚠ Close to limit"
+                usage >= 50 -> "👍 On track"
+                else -> "🔥 Great control"
+            }
+
+            binding.tvTotalSpent.setTextColor(
+                when {
+                    usage >= 100 -> Color.parseColor("#EF4444")
+                    usage >= 80 -> Color.parseColor("#F59E0B")
+                    else -> Color.parseColor("#22C55E")
+                }
+            )
+
+            // ===== DAILY LIMIT =====
+            val days = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
+            val daily = budgetGoal / days
+
+            binding.tvDailyLimit.text = "Daily Limit: R ${"%.2f".format(daily)}"
+
+            // ===== CHART =====
+            val chartData = expenses.groupBy { it.category }
+                .mapValues { it.value.sumOf { e -> e.amount }.toFloat() }
+
+            binding.dashboardChart.setData(chartData)
         }
     }
 
-    // ===== ORIGINAL STREAK LOGIC (UNCHANGED) =====
-    private suspend fun calculateUnder5000Streak(db: AppDatabase): Int {
+    // ================= RESET FEATURE =================
+    private fun resetStreak() {
+        binding.tvStreak.text = "🔥 Streak reset"
+        binding.tvRating.text = "🥉 Starter Badge"
+        binding.tvWarning.text = "Start rebuilding your streak 💪"
+    }
+
+    // ================= STREAK =================
+    private suspend fun calculateStreak(db: AppDatabase, budgetGoal: Double): Int {
+
         var streak = 0
         val calendar = Calendar.getInstance()
 
         withContext(Dispatchers.IO) {
-            for (i in 0 until 12) {
-                val startCal = calendar.clone() as Calendar
-                startCal.add(Calendar.MONTH, -i)
-                startCal.set(Calendar.DAY_OF_MONTH, 1)
 
-                val endCal = startCal.clone() as Calendar
-                endCal.set(Calendar.DAY_OF_MONTH, endCal.getActualMaximum(Calendar.DAY_OF_MONTH))
+            for (i in 0 until 12) {
+
+                val start = calendar.clone() as Calendar
+                start.add(Calendar.MONTH, -i)
+                start.set(Calendar.DAY_OF_MONTH, 1)
+
+                val end = start.clone() as Calendar
+                end.set(Calendar.DAY_OF_MONTH, end.getActualMaximum(Calendar.DAY_OF_MONTH))
 
                 val startDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    .format(startCal.time)
+                    .format(start.time)
 
                 val endDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    .format(endCal.time)
+                    .format(end.time)
 
-                val monthExpenses = db.expenseDao().getExpensesByPeriod(startDate, endDate)
-                val total = monthExpenses.sumOf { it.amount }
+                val month = db.expenseDao().getExpensesByPeriod(startDate, endDate)
+                val total = month.sumOf { it.amount }
 
-                if (total <= 5000) {
-                    streak++
-                } else {
-                    break
-                }
+                if (total <= budgetGoal) streak++
+                else break
             }
         }
 
         return streak
     }
 
-    // ===== GAMIFICATION SYSTEM =====
-
-    private fun getStreakLevel(streak: Int): String {
+    // ================= GAMIFICATION =================
+    private fun getLevel(streak: Int): String {
         return when {
-            streak >= 12 -> "Financial Master"
-            streak >= 6 -> "Money Warrior"
+            streak >= 12 -> "Master"
+            streak >= 6 -> "Pro Saver"
             streak >= 3 -> "Smart Saver"
             else -> "Beginner"
         }
@@ -144,10 +182,10 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun getBadge(streak: Int): String {
         return when {
-            streak >= 12 -> "🏆 Platinum Saver Badge"
-            streak >= 6 -> "🥇 Gold Saver Badge"
-            streak >= 3 -> "🥈 Silver Saver Badge"
-            else -> "🥉 Starter Badge"
+            streak >= 12 -> "🏆 Platinum"
+            streak >= 6 -> "🥇 Gold"
+            streak >= 3 -> "🥈 Silver"
+            else -> "🥉 Bronze"
         }
     }
 
@@ -159,5 +197,14 @@ class DashboardActivity : AppCompatActivity() {
             streak >= 1 -> "🔥🔥"
             else -> "🔥"
         }
+    }
+
+    private fun showEmptyState() {
+        binding.tvStreak.text = "Set a budget goal to start 🔥"
+        binding.tvRating.text = "-"
+        binding.tvSavings.text = "Savings: R 0.00"
+        binding.tvWarning.text = "No budget set"
+        binding.tvDailyLimit.text = "Daily Limit: R 0.00"
+        binding.pbBudget.progress = 0
     }
 }
