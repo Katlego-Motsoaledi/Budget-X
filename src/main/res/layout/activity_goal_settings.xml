@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0B1220">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- HEADER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Monthly Goals"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Control your spending limits"
+            android:textSize="14sp"
+            android:textColor="#94A3B8"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- CURRENT PROGRESS CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111C33"
+            android:padding="18dp"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budget Usage"
+                android:textSize="14sp"
+                android:textColor="#94A3B8"/>
+
+            <ProgressBar
+                android:id="@+id/pbBudget"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:progress="0"
+                android:layout_marginTop="10dp"
+                android:progressTint="#38BDF8"
+                android:backgroundTint="#24324A"/>
+        </LinearLayout>
+
+        <!-- INPUT CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111C33"
+            android:padding="18dp"
+            android:elevation="6dp"
+            android:orientation="vertical">
+
+            <!-- MIN GOAL -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Minimum Goal (R)"
+                android:textColorHint="#94A3B8">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMinGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#94A3B8"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- MAX GOAL -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Maximum Goal (R)"
+                android:layout_marginTop="12dp"
+                android:textColorHint="#94A3B8">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMaxGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#94A3B8"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- INFO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set realistic limits to improve your savings discipline."
+                android:textSize="12sp"
+                android:textColor="#64748B"
+                android:layout_marginTop="12dp"/>
+
+        </LinearLayout>
+
+        <!-- PREVIEW CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111C33"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:elevation="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal Preview"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You will receive alerts at 50%, 80% and 100% usage."
+                android:textSize="13sp"
+                android:textColor="#94A3B8"/>
+        </LinearLayout>
+
+        <!-- SAVE BUTTON -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveGoals"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Save Goals"
+            android:textStyle="bold"
+            android:textColor="#0B1220"
+            app:backgroundTint="#38BDF8"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

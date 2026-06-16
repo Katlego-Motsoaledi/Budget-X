@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0B1220"
+    android:padding="18dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HEADER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Overview"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Track your spending and build your streak"
+            android:textSize="14sp"
+            android:textColor="#94A3B8"
+            android:layout_marginBottom="18dp" />
+
+        <!-- TOTAL SPENT CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#111C33"
+            android:padding="18dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Spent This Month"
+                android:textSize="13sp"
+                android:textColor="#94A3B8" />
+
+            <TextView
+                android:id="@+id/tvTotalSpent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="R 0.00"
+                android:textColor="#FFFFFF"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/pbBudget"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:progress="0"
+                android:layout_marginTop="14dp"
+                android:progressTint="#38BDF8"
+                android:backgroundTint="#24324A" />
+        </LinearLayout>
+
+        <!-- STREAK CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#111C33"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvStreak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔥 Streak: 0"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FBBF24"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:id="@+id/tvSavings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Savings: R 0.00"
+                android:textSize="16sp"
+                android:textColor="#22C55E"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating: -"
+                android:textSize="16sp"
+                android:textColor="#60A5FA" />
+        </LinearLayout>
+
+        <!-- STATUS CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#111C33"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status: -"
+                android:textSize="16sp"
+                android:textColor="#FBBF24" />
+
+            <TextView
+                android:id="@+id/tvDailyLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily Limit: R 0.00"
+                android:textSize="16sp"
+                android:textColor="#60A5FA"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+
+        <!-- ACTION BUTTONS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#111C33"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddExpense"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="Add Expense"
+                android:textColor="#0B1220"
+                app:backgroundTint="#38BDF8"
+                android:layout_marginBottom="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewHistory"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="View Expense History"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#24324A" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSetGoal"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="Set Budget Goal"
+                android:textColor="#0B1220"
+                app:backgroundTint="#22C55E"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <!-- RESET BUTTON -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResetStreak"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Reset Streak"
+            android:textColor="#0B1220"
+            app:backgroundTint="#F59E0B"
+            android:layout_marginBottom="16dp" />
+
+        <!-- CHART CARD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111C33"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spending Breakdown"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="12dp" />
+
+                <com.example.budgetx.SimpleBarChartView
+                    android:id="@+id/dashboardChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
